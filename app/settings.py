@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-vitio$bm!#dvty%af#a!t3w%453+*$-cg*5&)35a@eyx4^1s3v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -90,16 +90,16 @@ WSGI_APPLICATION = 'app.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "taskify",
-        "USER": "sparklates",
-        "PASSWORD": "Default@123",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "taskify",
+#         "USER": "sparklates",
+#         "PASSWORD": "Default@123",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432",
+#     }
+# }
 
 
 
