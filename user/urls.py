@@ -15,12 +15,12 @@ from user import views
 app_name = 'user'
 
 urlpatterns = [
-    # path('create/', views.CreateUserView.as_view(), name='create'),
-    # path('jwt/token/', views.CustomTokenObtainView.as_view(), name='token_obtain_pair'),
-    # path('jwt/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    # path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-    # path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
-    # path('me/', views.ManageUserView.as_view(), name="me"),
-    # path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('create/', views.CreateUserView.as_view(), name='create'),
+    path('token/', views.CustomTokenObtainView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
+    path('me/', views.ManageUserView.as_view(), name="me"),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
     
 ]

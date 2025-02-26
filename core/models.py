@@ -7,6 +7,14 @@ from django.contrib.auth.models import (
     User
 )
 
+class UserRole(models.Model):
+    """User Role in the system."""
+    name = models.CharField(max_length=255, blank=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
 class UserManager(BaseUserManager):
     """Manager for users."""
 
@@ -43,6 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin ):
     joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    role = models.ForeignKey(UserRole, related_name='user_role', on_delete=models.CASCADE, null=True)
 
     objects = UserManager()
 
@@ -50,3 +59,6 @@ class User(AbstractBaseUser, PermissionsMixin ):
 
     def __str__(self):
         return self.username
+
+
+
