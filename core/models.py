@@ -7,10 +7,11 @@ from django.contrib.auth.models import (
     User
 )
 
+
 class UserRole(models.Model):
     """User Role in the system."""
-    name = models.CharField(max_length=255, blank=True)
-    description = models.TextField()
+    name = models.CharField(max_length=255, null=True)
+    description = models.TextField(max_length=255)
 
     def __str__(self):
         return self.name
@@ -38,7 +39,6 @@ class UserManager(BaseUserManager):
 
         return user
     
-
 class User(AbstractBaseUser, PermissionsMixin ):
     """User in the system."""
     username = models.CharField(max_length=255, unique=True)
@@ -60,5 +60,15 @@ class User(AbstractBaseUser, PermissionsMixin ):
     def __str__(self):
         return self.username
 
+class Priority(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
+    status = models.CharField(max_length=255)
 
-
+class Task(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
+    priority = models.ForeignKey(Priority,related_name='priority',on_delete=models.CASCADE, null=True)
+    assignedto = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=255, null=True)
+    isdeleted = models.BooleanField(null=True)

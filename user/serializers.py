@@ -21,8 +21,10 @@ class UserSerializer(serializers.ModelSerializer):
         return get_user_model().objects.create_user(**validated_data)
 
 
-# class LogoutSerializer(serializers.ModelSerializer):
-#     model = Logout
+class LogoutSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = '__all__'
 
 
 class UserRoleSerializer(serializers.ModelSerializer):

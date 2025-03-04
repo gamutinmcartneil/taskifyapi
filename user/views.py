@@ -8,7 +8,7 @@ import datetime
 
 from django.http import JsonResponse
 
-from user.serializers import UserSerializer
+from user.serializers import UserSerializer, LogoutSerializer
 
 from rest_framework import generics
 from rest_framework.generics import GenericAPIView
@@ -69,6 +69,7 @@ class DeleteCookieTokenView(APIView):
     
 
 class LogoutView(GenericAPIView):
+    serializer_class = LogoutSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
