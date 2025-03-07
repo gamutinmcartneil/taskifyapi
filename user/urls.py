@@ -21,6 +21,4 @@ urlpatterns = [
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('token/blacklist/', TokenBlacklistView.as_view(), name='token_blacklist'),
     path('me/', views.ManageUserView.as_view(), name="me"),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-    
 ]

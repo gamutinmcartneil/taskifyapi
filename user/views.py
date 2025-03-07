@@ -8,10 +8,10 @@ import datetime
 
 from django.http import JsonResponse
 
-from user.serializers import UserSerializer, LogoutSerializer
+from user.serializers import UserSerializer
 
 from rest_framework import generics
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import GenericAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -22,15 +22,11 @@ from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
-# class PrivilageGroupView(generics.ListCreateAPIView):
-#     """Create a new privilage group in the system."""
-#     serializer_class = PrivilageGroupSerializer
-
-class CreateUserView(generics.CreateAPIView):
+class CreateUserView(CreateAPIView):
     """Create a new user in the system."""
     serializer_class = UserSerializer
 
-class ManageUserView(generics.RetrieveUpdateAPIView):
+class ManageUserView(RetrieveUpdateAPIView):
     """Manage the authenticated user."""
    
     authentication_classes = [JWTAuthentication]
@@ -52,37 +48,8 @@ def validate_token(request):
         return Response({"valid": False}, status=401)
 
 
-class SetCookieTokenView(APIView):
-            """Set JWT token in cookies."""
-            def post(self, request):
-                token = request.data.get('token')
-                response = Response({"message": "Token set in cookies"})
-                response.set_cookie('jwt', token, httponly=True)
-                return response
-
-class DeleteCookieTokenView(APIView):
-    """Delete JWT token from cookies."""
-    def post(self, request):
-        response = Response({"message": "Token deleted from cookies"})
-        response.delete_cookie('jwt')
-        return response
-    
-
-class LogoutView(GenericAPIView):
-    serializer_class = LogoutSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
-        try:
-            refresh_token = request.data["refresh_token"]
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-            return Response(status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
 class CustomTokenObtainView(TokenObtainPairView):
+
     def post(self, request, *args, **kwargs):
         token_response = super().post(request, *args, **kwargs)
         
@@ -96,3 +63,4 @@ class CustomTokenObtainView(TokenObtainPairView):
         }
         
         return JsonResponse(combined_data)
+

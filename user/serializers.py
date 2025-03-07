@@ -2,12 +2,14 @@
 Serializers for the user API View.
 """
 from django.contrib.auth import get_user_model
-from core.models import UserRole
+from core.models import UserRole, User
 
+from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework import serializers
+from django.contrib.auth import authenticate
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(ModelSerializer):
     """Serializer for the user object."""
     
     class Meta:
@@ -20,14 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         """Create and return a user with encrypted password."""
         return get_user_model().objects.create_user(**validated_data)
 
-
-class LogoutSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = get_user_model()
-        fields = '__all__'
-
-
-class UserRoleSerializer(serializers.ModelSerializer):
+class UserRoleSerializer(ModelSerializer):
 
     class Meta:
         model = UserRole
