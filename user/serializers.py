@@ -27,6 +27,3 @@ class UserRoleSerializer(ModelSerializer):
     class Meta:
         model = UserRole
         fields = '__all__'
-
-    def create(self):
-        return 

@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'core',
     'user',
     'task',
+    'snippet',
+    'authentication'
 ]
 
 MIDDLEWARE = [

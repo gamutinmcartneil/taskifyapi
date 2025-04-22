@@ -28,6 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path('api/docs/',SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),
+    path('api/auth/', include('authentication.urls')),
     path('api/user/', include('user.urls')),
     path('api/task/', include('task.urls')),
+    path('api/snippets/', include('snippet.urls')),
 ]
